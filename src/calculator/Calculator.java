@@ -12,7 +12,7 @@ public class Calculator {
     public String subtraction(String firstOperand, String secondOperand){
         String result = "";
         if(firstOperand.endsWith(secondOperand)){
-            result = firstOperand.replace(secondOperand, " ");
+            result = firstOperand.replace(secondOperand, "");
         } else
             result = firstOperand;
         return result;
@@ -20,22 +20,22 @@ public class Calculator {
 
     public String multiply(String firstOperand, String secondOperand){
         String result = "";
-        char[] symbolsFirstOperand = firstOperand.toCharArray();
-        char[] symbolsSecondOperand = secondOperand.toCharArray();
+        char[] lettersOfFirstOperand = firstOperand.toCharArray();
+        char[] lettersOfSecondOperand = secondOperand.toCharArray();
         operandsLengthChecker = new OperandsLengthChecker(firstOperand.length(),
                                                           secondOperand.length());
 
-        for(int i = 0; i < symbolsFirstOperand.length; i++){
-            for(int j = 0; j < symbolsSecondOperand.length; j++){
+        for(int i = 0; i < lettersOfFirstOperand.length; i++){
+            for(int j = 0; j < lettersOfSecondOperand.length; j++){
                 if(j == i) {
-                    result += symbolsFirstOperand[i] + "" +
-                              symbolsSecondOperand[j];
+                    result += lettersOfFirstOperand[i] + "" +
+                              lettersOfSecondOperand[j];
                 }
             }
         }
 
         if( !operandsLengthChecker.isLengthsOperandsEqual() ){
-            result += getLastPartOperand(firstOperand, secondOperand);
+            result += getLastLettersOperand(firstOperand, secondOperand);
         }
 
         return result;
@@ -43,25 +43,33 @@ public class Calculator {
 
     public String divide(String firstOperand, String secondOperand){
         String divResult = "";
-        char[] symbolsFirstOperand = firstOperand.toCharArray();
-        char[] symbolsSecondOperand = secondOperand.toCharArray();
+        char[] lettersOfFirstOperand = firstOperand.toCharArray();
+        char[] lettersOfSecondOperand = secondOperand.toCharArray();
 
-        if( isDivider(symbolsFirstOperand, symbolsSecondOperand) ){
-            divResult = getDivResult(symbolsFirstOperand, symbolsSecondOperand);
+        if( isDivider(lettersOfFirstOperand, lettersOfSecondOperand) ){
+            divResult = getDivResult(lettersOfFirstOperand,
+                                     lettersOfSecondOperand);
+            int lengthOfResultWithDivider = divResult.length() +
+                                            secondOperand.length();
+
+            if(firstOperand.length() > lengthOfResultWithDivider){
+                divResult += getLastLettersOperand(firstOperand, lengthOfResultWithDivider);
+            }
+
         }else {
             divResult = firstOperand;
         }
         return divResult;
     }
 
-    private String getDivResult(char[] symbolsFirstOperand, char[] symbolsSecondOperand){
+    private String getDivResult(char[] lettersOfFirstOperand, char[] lettersOfSecondOperand){
         int prevPosition;
         String divResult = "";
-        String firstOperand = String.valueOf(symbolsFirstOperand);
+        String firstOperand = String.valueOf(lettersOfFirstOperand);
 
-        for(int i = 0; i < symbolsFirstOperand.length; i++){
-            for(int j = 0 ; j < symbolsSecondOperand.length; j++){
-                if(symbolsFirstOperand[i] == symbolsSecondOperand[j]){
+        for(int i = 0; i < lettersOfFirstOperand.length; i++){
+            for(int j = 0 ; j < lettersOfSecondOperand.length; j++){
+                if(lettersOfFirstOperand[i] == lettersOfSecondOperand[j]){
                     prevPosition = i - 1;
                     divResult +=  firstOperand.charAt(prevPosition);
                 }
@@ -70,7 +78,7 @@ public class Calculator {
         return divResult;
     }
 
-    private String getLastPartOperand(String firstOperand, String secondOperand){
+    private String getLastLettersOperand(String firstOperand, String secondOperand){
         String result = "";
         operandsLengthChecker = new OperandsLengthChecker(firstOperand.length(),
                                                           secondOperand.length());
@@ -82,6 +90,10 @@ public class Calculator {
         return result;
     }
 
+    private String getLastLettersOperand(String firstOperand, int lengthOfResultWithDivider){
+        return firstOperand.substring(lengthOfResultWithDivider);
+    }
+
     private boolean isDivider(char[] symbolsFirstOperand, char[] symbolsSecondOperand){
         String divider = "";
         String secondOperand = String.valueOf(symbolsSecondOperand);
@@ -89,7 +101,7 @@ public class Calculator {
             for(int j = 0; j < symbolsSecondOperand.length; j++){
                 if(j != i) {
                     if(symbolsFirstOperand[i] == symbolsSecondOperand[j]) {
-                        divider += symbolsFirstOperand[i] + "";
+                        divider += symbolsFirstOperand[i];
                     }
                 }
             }
