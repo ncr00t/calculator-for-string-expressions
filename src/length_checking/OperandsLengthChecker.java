@@ -9,12 +9,12 @@ public class OperandsLengthChecker {
         this.secondOperandLength = secondOperandLength;
     }
 
-    public int getFirstOperandLength() {
-        return firstOperandLength;
+    public void setFirstOperandLength(int firstOperandLength) {
+        this.firstOperandLength = firstOperandLength;
     }
 
-    public int getSecondOperandLength() {
-        return secondOperandLength;
+    public void setSecondOperandLength(int secondOperandLength) {
+        this.secondOperandLength = secondOperandLength;
     }
 
     public boolean isLengthFirstOperandGreater(){

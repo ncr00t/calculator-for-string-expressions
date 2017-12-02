@@ -6,6 +6,7 @@ public class Main {
         System.out.println(calculator.sum("xyz", "abc"));
         System.out.println(calculator.subtraction("abcxyzd", "xyz"));
         System.out.println(calculator.multiply("abc", "xyzps"));
+        System.out.println(calculator.divide("axbycz","xyz"));
 
     }
 }
