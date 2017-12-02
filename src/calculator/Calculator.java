@@ -37,7 +37,6 @@ public class Calculator {
         if( !operandsLengthChecker.isLengthsOperandsEqual() ){
             result += getLastLettersOperand(firstOperand, secondOperand);
         }
-
         return result;
     }
 
@@ -49,8 +48,8 @@ public class Calculator {
         if( isDivider(lettersOfFirstOperand, lettersOfSecondOperand) ){
             divResult = getDivResult(lettersOfFirstOperand,
                                      lettersOfSecondOperand);
-            int lengthOfResultWithDivider = divResult.length() +
-                                            secondOperand.length();
+            int dividerLength = secondOperand.length();
+            int lengthOfResultWithDivider = divResult.length() + dividerLength;
 
             if(firstOperand.length() > lengthOfResultWithDivider){
                 divResult += getLastLettersOperand(firstOperand, lengthOfResultWithDivider);
