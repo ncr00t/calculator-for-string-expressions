@@ -1,12 +1,19 @@
 import calculator.Calculator;
+import parser.ExpressionParser;
+import wrapper.Wrapper;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Calculator calculator = new Calculator();
-        System.out.println(calculator.sum("xyz", "abc"));
-        System.out.println(calculator.subtraction("abcxyzd", "xyz"));
-        System.out.println(calculator.multiply("abc", "xyzps"));
-        System.out.println(calculator.divide("axbyczpf","xyz"));
+        System.out.println("Ведите выражение, разделяя пробелом(например,  abc + xyz ): ");
+        Scanner scanner = new Scanner(System.in);
+        String  expression = scanner.nextLine();
+        ExpressionParser expressionParser = new ExpressionParser(expression);
+
+        System.out.println("Результат: "+ expression + " = " + expressionParser.parser());
 
     }
+
+
 }
